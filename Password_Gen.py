@@ -4,16 +4,19 @@ digits = '0123456789'
 lowercase_letters = 'abcdefghijklmnopqrstuvwxyz'
 uppercase_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 punctuation = '!#$%&*+-=?@^_'
-chars = digits
+chars = ''
 
 pass_num = int(input('Введите целое число - количество паролей для генерации: '))
 pass_len = int(input('Введите целое число - длинну паролей: '))
 
+pass_numbers = input('Должны ли быть в паролях цифры? Д - да Н - нет\n')
 pass_ABC = input('Должны ли быть в паролях прописные (большие) буквы? Д - да Н - нет\n')
 pass_abc = input('Должны ли быть в паролях строчные (маленькие) буквы? Д - да Н - нет\n')
 pass_specials = input('Должны ли быть в паролях специальные (!#$%&*+-=?@^_) символы? Д - да Н - нет\n')
 pass_similar = input('Исключать ли неоднозначные символы (il1Lo0O) в паролях? Д - да Н - нет\n')
 
+if pass_numbers.lower() == 'д':
+    chars += digits
 if pass_ABC.lower() == 'д':
     chars += uppercase_letters
 if pass_abc.lower() == 'д':
