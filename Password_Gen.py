@@ -27,7 +27,7 @@ if pass_similar.lower() == 'д':
 
 def generate_password(length, chars):
     random.seed()
-    return [random.choice(chars) for i in range(length)]
+    return [random.choice(chars) for _ in range(length)]
 
 
 for i in range(pass_num):
