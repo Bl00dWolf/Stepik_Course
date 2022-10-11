@@ -4,7 +4,7 @@ digits = '0123456789'
 lowercase_letters = 'abcdefghijklmnopqrstuvwxyz'
 uppercase_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 punctuation = '!#$%&*+-=?@^_'
-chars = ''
+chars = digits
 
 pass_num = int(input('Введите целое число - количество паролей для генерации: '))
 pass_len = int(input('Введите целое число - длинну паролей: '))
@@ -19,7 +19,16 @@ if pass_ABC.lower() == 'д':
 if pass_abc.lower() == 'д':
     chars += lowercase_letters
 if pass_specials.lower() == 'д':
-    chars += pass_specials
+    chars += punctuation
 if pass_similar.lower() == 'д':
     for c in 'il1Lo0O':
-        chars.replace(c, '')
+        chars = chars.replace(c, '')
+
+
+def generate_password(length, chars):
+    random.seed()
+    return [random.choice(chars) for i in range(length)]
+
+
+for i in range(pass_num):
+    print(*generate_password(pass_len, chars), sep='')
