@@ -7,14 +7,19 @@ chars_eng = 'abcdefghijklmnopqrstuvwxyz'
 
 
 def crypt(string, delta):
+    if lang.lower() == 'р':
+        chars, mod = chars_ru, 32
+    elif lang.lower() == 'а':
+        chars, mod = chars_eng, 26
+
     for i in range(len(string)):
         if string[i] in '1234567890,./: !?':
             continue
 
         if string[i].isupper():
-            chartmp = chars_ru.upper()[(chars_ru.find(string[i].lower()) + delta) % 32]
+            chartmp = chars.upper()[(chars.find(string[i].lower()) + delta) % mod]
         else:
-            chartmp = chars_ru.lower()[(chars_ru.find(string[i].lower()) + delta) % 32]
+            chartmp = chars.lower()[(chars.find(string[i].lower()) + delta) % mod]
 
         string = string[:i] + chartmp + string[i + 1:]
     return string
