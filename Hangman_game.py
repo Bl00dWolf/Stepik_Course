@@ -83,6 +83,7 @@ def display_hangman(tries):
 
 
 def play(word):
+    word = str(word)
     word_completion = '_' * len(word)  # строка, содержащая символы _ на каждую букву задуманного слова
     guessed = False  # сигнальная метка
     guessed_letters = []  # список уже названных букв
@@ -91,3 +92,21 @@ def play(word):
 
     print('Давайте играть в угадайку слов!')
     display_hangman(tries)
+    print(f'Загаданное слово: {word_completion}')
+
+    while tries != 0:
+        inword = input('Введите слово или одну букву\n').lower()
+        if not inword.isalpha():
+            print('Вы ввели некорректные данные! Попробуйте еще раз.')
+            continue
+        if len(inword) == 1:
+            guessed_letters.append(inword)
+            if word.lower().count(inword.lower()) == 0:
+                tries -= 1
+                print(display_hangman(tries))
+                print(f'Ауч, вы не угадали, такой буквы нет!\nМинус жизнь, у вас осталось их - {tries}')
+                continue
+            for i in range(len(word)):
+                if inword.lower() == word[i].lower():
+                    word_completion = word_completion[:i] + inword + word_completion[i:]
+            print('Отлично, вы отгадали букву!')
