@@ -83,7 +83,6 @@ def display_hangman(tries):
 
 
 def play(word):
-    print(f'Отладка - {word}')
     word = str(word)
     word_completion = '_' * len(word)  # строка, содержащая символы _ на каждую букву задуманного слова
     guessed_letters = []  # список уже названных букв
