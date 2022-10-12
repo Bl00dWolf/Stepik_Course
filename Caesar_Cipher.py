@@ -1,4 +1,4 @@
-choice = input('Шифр Цезаря\nЧто вы хотите сделать с текстом? Ш - шифровать Д - расшифровать\n')
+choice = input('Шифр Цезаря\nЧто вы хотите сделать с текстом? Ш - шифровать Р - расшифровать\n')
 lang = input('Какой язык текста будет использован? Р - русский А - английский\n')
 delta = int(input('Задайте шаг сдвига (целое число)\n'))
 
@@ -6,7 +6,7 @@ chars_ru = 'абвгдежзийклмнопрстуфхцчшщъыьэюя'
 chars_eng = 'abcdefghijklmnopqrstuvwxyz'
 
 
-def crypt(string, delta):
+def crypt_n_decrypt(string, delta, lang, choice):
     if lang.lower() == 'р':
         chars, mod = chars_ru, 32
     elif lang.lower() == 'а':
@@ -28,8 +28,4 @@ def crypt(string, delta):
     return string
 
 
-def decrypt(string, delta):
-    pass
-
-
-print(crypt(input('Введите текст\n'), delta))
+print(crypt_n_decrypt(input('Введите текст\n'), delta, lang, choice))
