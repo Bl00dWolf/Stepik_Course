@@ -12,6 +12,9 @@ def crypt(string, delta):
     elif lang.lower() == 'а':
         chars, mod = chars_eng, 26
 
+    if choice.lower() == 'р':
+        delta = -delta
+
     for i in range(len(string)):
         if string[i] in '1234567890,./: !?':
             continue
@@ -25,5 +28,8 @@ def crypt(string, delta):
     return string
 
 
-if choice.lower() == 'ш':
-    print(crypt(input('Введите текст для расшифровки\n'), delta))
+def decrypt(string, delta):
+    pass
+
+
+print(crypt(input('Введите текст\n'), delta))
