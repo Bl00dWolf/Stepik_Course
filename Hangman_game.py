@@ -83,9 +83,9 @@ def display_hangman(tries):
 
 
 def play(word):
+    print(f'Отладка - {word}')
     word = str(word)
     word_completion = '_' * len(word)  # строка, содержащая символы _ на каждую букву задуманного слова
-    guessed = False  # сигнальная метка
     guessed_letters = []  # список уже названных букв
     guessed_words = []  # список уже названных слов
     tries = 6  # количество попыток
@@ -95,6 +95,10 @@ def play(word):
     print(f'Загаданное слово: {word_completion}')
 
     while tries != 0:
+        if word_completion.lower() == word.lower():
+            print('Поздравляю! Вы угадали слово!')
+            break
+
         inword = input('Введите слово или одну букву\n').lower()
 
         if not inword.isalpha():
@@ -115,8 +119,8 @@ def play(word):
 
             for i in range(len(word)):
                 if inword.lower() == word[i].lower():
-                    word_completion = word_completion[:i] + inword + word_completion[i:]
-            print('Отлично, вы отгадали букву!')
+                    word_completion = word_completion[:i] + inword + word_completion[i + 1:]
+            print(f'Отлично, вы отгадали букву!\n{word_completion}')
 
         elif len(inword) > 1:
             if inword.lower() in guessed_words:
@@ -132,3 +136,6 @@ def play(word):
                 print(display_hangman(tries))
                 print(f'Ауч, вы не угадали, это не то слово!\nМинус жизнь, у вас осталось их - {tries}')
                 continue
+
+
+play(get_word(word_list))
