@@ -7,12 +7,12 @@ chars_eng = 'abcdefghijklmnopqrstuvwxyz'
 
 
 def crypt(string, delta):
-    for c in string:
-        if c in '1234567890,./: !?':
+    for i in range(len(string)):
+        if string[i] in '1234567890,./: !?':
             continue
-        string = string.lower().replace(c, chars_ru[(chars_ru.find(c) + delta) % 32])
-    return string
 
+        string = string[:i] + chars_ru.lower()[(chars_ru.find(string[i].lower()) + delta) % 32] + string[i+1:]
+    return string
 
 if choice.lower() == 'ш':
     print(crypt(input('Введите текст для расшифровки\n'), delta))
