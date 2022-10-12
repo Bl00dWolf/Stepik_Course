@@ -11,8 +11,14 @@ def crypt(string, delta):
         if string[i] in '1234567890,./: !?':
             continue
 
-        string = string[:i] + chars_ru.lower()[(chars_ru.find(string[i].lower()) + delta) % 32] + string[i+1:]
+        if string[i].isupper():
+            chartmp = chars_ru.upper()[(chars_ru.find(string[i].lower()) + delta) % 32]
+        else:
+            chartmp = chars_ru.lower()[(chars_ru.find(string[i].lower()) + delta) % 32]
+
+        string = string[:i] + chartmp + string[i + 1:]
     return string
+
 
 if choice.lower() == 'ш':
     print(crypt(input('Введите текст для расшифровки\n'), delta))
