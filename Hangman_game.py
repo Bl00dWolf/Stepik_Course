@@ -96,17 +96,39 @@ def play(word):
 
     while tries != 0:
         inword = input('Введите слово или одну букву\n').lower()
+
         if not inword.isalpha():
             print('Вы ввели некорректные данные! Попробуйте еще раз.')
             continue
+
         if len(inword) == 1:
-            guessed_letters.append(inword)
+            if inword.lower() in guessed_letters:
+                print('Вы уже указывали данную букву! Попробуте другую!')
+                continue
+            guessed_letters.append(inword.lower())
+
             if word.lower().count(inword.lower()) == 0:
                 tries -= 1
                 print(display_hangman(tries))
                 print(f'Ауч, вы не угадали, такой буквы нет!\nМинус жизнь, у вас осталось их - {tries}')
                 continue
+
             for i in range(len(word)):
                 if inword.lower() == word[i].lower():
                     word_completion = word_completion[:i] + inword + word_completion[i:]
             print('Отлично, вы отгадали букву!')
+
+        elif len(inword) > 1:
+            if inword.lower() in guessed_words:
+                print('Вы уже указывали данное слово! Попробуйте другое!')
+                continue
+            guessed_words.append(inword.lower())
+
+            if inword.lower() == word.lower():
+                print('Поздравляю! Вы угадали слово!')
+                break
+            else:
+                tries -= 1
+                print(display_hangman(tries))
+                print(f'Ауч, вы не угадали, это не то слово!\nМинус жизнь, у вас осталось их - {tries}')
+                continue
