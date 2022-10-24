@@ -5,7 +5,6 @@ def print_matrix(matrix, reverse=False):
     :param reverse: если true то печатает матрицу как колонка, столбец
     :return: None
     '''
-    print("-" * 15)
     if not reverse:
         for row in matrix:
             print(*row)

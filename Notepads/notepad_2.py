@@ -2,39 +2,37 @@
 # matrix = [input().split() for _ in range(n)]
 
 n = 3
-matrix = [['0', '1', '2'],
-          ['1', '2', '7'],
-          ['2', '3', '4']]
+matrix = [['8', '1', '6'],
+          ['3', '5', '7'],
+          ['4', '9', '2']]
+
+# переводим все в int
+matrix = [[int(elem) for elem in row] for row in matrix]
 
 
-def print_matrix(matrix):
-    print("-" * 15)
-    for i in matrix:
-        for j in i:
-            print(j, end=' ')
-        print()
+def is_gold(matrix):
+    sum_gold = sum(matrix[0])
+    for row in matrix:
+        if sum(row) != sum_gold:
+            return False
+    return True
 
 
-def print_matrix_rev(matrix):
-    print("-" * 15)
-    for c in range(len(matrix[0])):
-        for r in range(len(matrix)):
-            print(matrix[r][c], end=' ')
-        print()
+matrix_rev = []
+for i in range(n):
+    matrix_rev.append([])
+    for j in range(n):
+        matrix_rev[i].append(matrix[j][i])
 
+sum_main, sum_add = 0, 0
+for i in range(n):
+    for j in range(n):
+        if i == j:
+            sum_main += matrix[i][j]
+        if j == n - i - 1:
+            sum_add += matrix[i][j]
 
-print_matrix()
-
-flag = 'YES'
-for i in range(len(matrix)):
-    for j in range(len(matrix[i])):
-        if matrix[i][j] == matrix[j][i] or i == j:
-            continue
-        else:
-            flag = 'NO'
-            break
-
-# if matrix[1][0] == matrix[0][1]
-# and matrix[2][0] = matrix[0][2]
-# and matrix[2][1] = matrix[1][2]
-print(flag)
+if is_gold(matrix) and is_gold(matrix_rev) and sum_add == sum_main:
+    print('YES')
+else:
+    print('NO')
