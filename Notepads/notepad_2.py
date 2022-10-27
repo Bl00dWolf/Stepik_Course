@@ -1,38 +1,28 @@
-# n = int(input())
-# matrix = [input().split() for _ in range(n)]
+matrix_1 = [[1, 1, 1],
+            [2, 2, 2],
+            [3, 3, 3]]
 
-n = 3
-matrix = [['8', '1', '6'],
-          ['3', '5', '7'],
-          ['4', '9', '2']]
-
-# переводим все в int
-matrix = [[int(elem) for elem in row] for row in matrix]
+matrix_2 = [[1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9]]
 
 
-def is_gold(matrix):
-    sum_gold = sum(matrix[0])
-    for row in matrix:
-        if sum(row) != sum_gold:
-            return False
-    return True
+def matrix_multiply(matrix_1, matrix_2):
+    """
+    Возвращает матрицу - результат перемножения двух переданных матриц.
+    Число строк и столбцов должно быть одинаковым!
+    :param matrix_1: Первая матрица
+    :param matrix_2: Вторая матрица
+    :return: Матрица - результат перемножения
+    """
+    matrix_3 = [[0] * len(row) for row in matrix_1]
+
+    for k in range(len(matrix_3[0])):
+        for i in range(len(matrix_3)):
+            for j in range(len(matrix_3[i])):
+                matrix_3[i][j] += matrix_1[i][j] * matrix_2[k][j]
+    return matrix_3
 
 
-matrix_rev = []
-for i in range(n):
-    matrix_rev.append([])
-    for j in range(n):
-        matrix_rev[i].append(matrix[j][i])
-
-sum_main, sum_add = 0, 0
-for i in range(n):
-    for j in range(n):
-        if i == j:
-            sum_main += matrix[i][j]
-        if j == n - i - 1:
-            sum_add += matrix[i][j]
-
-if is_gold(matrix) and is_gold(matrix_rev) and sum_add == sum_main:
-    print('YES')
-else:
-    print('NO')
+for row in matrix_multiply(matrix_1, matrix_2):
+    print(*row)

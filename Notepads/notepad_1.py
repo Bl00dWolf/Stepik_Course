@@ -1,33 +1,14 @@
-horse_pos = input().lower()
-chess = []
-abc_input = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+temp = input().split()
+n, m = int(temp[0]), int(temp[1])
+matrix = [[0] * m for _ in range(n)]
 
-[chess.append(['.'] * 8) for _ in range(8)]
+num = 0
+for q in range(n * m):
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            if i + j == q:
+                num += 1
+                matrix[i][j] = num
 
-
-def print_matrix(matrix, reverse=False):
-    '''
-    :param matrix: Сама матрица
-    :param reverse: если true то печатает матрицу как колонка, столбец
-    :return: None
-    '''
-    if not reverse:
-        for row in matrix:
-            print(*row)
-    if reverse:
-        for c in range(len(matrix[0])):
-            for r in range(len(matrix)):
-                print(matrix[r][c], end=' ')
-            print()
-
-
-horse_x = 7 - (int(horse_pos[1]) - 1)
-horse_y = abc_input.index(horse_pos[0])
-chess[horse_x][horse_y] = 'N'
-
-for i in range(8):
-    for j in range(8):
-        if abs((horse_x - j) * (horse_y - i)) == 2:
-            chess[j][i] = '*'
-
-print_matrix(chess)
+for row in matrix:
+    print(*row)
