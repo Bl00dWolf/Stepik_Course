@@ -1,14 +1,47 @@
-temp = input().split()
-n, m = int(temp[0]), int(temp[1])
-matrix = [[0] * m for _ in range(n)]
+import turtle
 
-num = 0
-for q in range(n * m):
-    for i in range(len(matrix)):
-        for j in range(len(matrix[i])):
-            if i + j == q:
-                num += 1
-                matrix[i][j] = num
 
-for row in matrix:
-    print(*row)
+def rectangle(width, height):
+    turtle.forward(width)
+    turtle.right(90)
+    turtle.forward(height)
+    turtle.right(90)
+    turtle.forward(width)
+    turtle.right(90)
+    turtle.forward(height)
+
+
+def triangle(side):
+    turtle.forward(side)
+    turtle.left(120)
+    turtle.forward(side)
+    turtle.left(120)
+    turtle.forward(side)
+
+
+def square(side):
+    rectangle(side, side)
+
+
+def hexagon(side):
+    for _ in range(6):
+        turtle.forward(side)
+        turtle.left(60)
+
+
+def romb(side):
+    turtle.forward(side)
+    turtle.right(60)
+    turtle.forward(side)
+    turtle.right(120)
+    turtle.forward(side)
+    turtle.right(60)
+    turtle.forward(side)
+
+
+for _ in range(12):
+    turtle.forward(200)
+    turtle.backward(200)
+    turtle.left(25)
+
+input()
