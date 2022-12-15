@@ -1,10 +1,7 @@
-# счетчик для нужного количества ураганов
-early_hurricanes = ____
+from datetime import timedelta
 
-# цикл по датам в которые был ураган
-for hurricane in ____:
-    # если месяц урагана меньше чем июнь (порядковый номер 6)
-    if ____.____ < ____:
-        early_hurricanes += 1
+td = timedelta(weeks=-1, hours=-20, minutes=-120)
+abs_td = abs(td)
 
-print(early_hurricanes)
+print(td)
+print(abs_td)
