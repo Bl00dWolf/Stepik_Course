@@ -1,2 +1,2 @@
-a, b, c = input(), input(), input()
-
+s = 'test'
+print({k: v for k, v in enumerate(s)})
