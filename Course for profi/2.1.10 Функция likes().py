@@ -9,6 +9,3 @@ def likes(names):
         return f'{names[0]}, {names[1]} и {names[2]} оценили данную запись'
     elif len(names) > 3:
         return f'{names[0]}, {names[1]} и {len(names) - 2} других оценили данную запись'
-
-
-print(likes(['Олег', 'Боря']))

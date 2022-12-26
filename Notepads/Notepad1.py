@@ -1,6 +1,4 @@
-import calendar
-import locale
+import sys
 
-locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
-
-print(calendar.calendar(2023))
+for line in sys.stdin:
+    print(line.strip('\n'))
