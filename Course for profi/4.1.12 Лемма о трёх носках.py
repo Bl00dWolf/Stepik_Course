@@ -1,5 +1,8 @@
 import sys
 
-data = {s.strip('\n').split(' - ')[0]: int(s.strip('\n').split(' - ')[1]) for s in sys.stdin.readlines()}
+data = [int(s) for s in sys.stdin.readlines()]
 
-print(*filter(lambda name, num: num % 2 == 0, data))
+if data[-1] % 2 == 0 and len(data) % 2 == 0:
+    print('Анри')
+else:
+    print('Дима')
