@@ -26,3 +26,13 @@ staff_broken = [('Developing', 'Miguel Norris'), ('Sales', 'Connie Reid'), ('Sal
                 ('Accounting', 'Jane Jackson'), ('Developing', 'Deborah George'), ('Accounting', 'Michelle Wright'),
                 ('Accounting', 'Dale Houston')]
 
+staff = defaultdict(set)
+for division, worker in staff_broken:
+    staff[division].add(worker)
+
+for division, workers in staff.items():
+    staff[division] = sorted(list(staff.get(division)))
+
+for division, workers in sorted(staff.items()):
+    print(division, ': ', end='', sep='')
+    print(*workers, sep=', ')
