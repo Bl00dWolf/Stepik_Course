@@ -7,4 +7,5 @@ def print_sand_watches():
 
     print_line(1, 16)
 
+
 print_sand_watches()
