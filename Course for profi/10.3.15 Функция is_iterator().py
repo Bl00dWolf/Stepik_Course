@@ -1,0 +1,1 @@
+is_iterator = lambda obj: all([]) in dir(obj)
