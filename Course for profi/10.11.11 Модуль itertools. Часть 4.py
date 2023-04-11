@@ -14,4 +14,6 @@ students = [Student('Гагиев', 'Александр', 10), Student('Деде
             Student('Денисов', 'Илья', 11), Student('Букулова', 'Диана', 10), Student('Акоева', 'Лера', 11)]
 
 students.sort(key=lambda pr: pr.name)
-gp = groupby(students, lambda pr: sum(1 for _ in pr.name))
+gp = groupby(students, lambda pr: pr.name)
+maxres = max(gp, key=lambda x: sum(1 for _ in x[1]))
+print(maxres[0])
