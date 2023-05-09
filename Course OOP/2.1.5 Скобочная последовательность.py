@@ -1,7 +1,6 @@
-import re
+s = input()
 
-# Неверный паттерн, пока не знаю как сделать верно это задание
-if re.fullmatch(r'\(.*?\)', input()):
-    print('True')
-else:
-    print('False')
+while '()' in s:
+    s = s.replace('()', '')
+
+print(False if s else True)
