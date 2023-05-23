@@ -19,25 +19,13 @@ class Knight:
             self.vertical = y
 
     def draw_board(self):
-        board = [['.'] * 8 for _ in range(8)]
-        board[Knight.hor_pos[self.horizontal] - 1][self.vertical - 1] = 'N'
+        board = [[' . '] * 8 for _ in range(8)]
+        board[Knight.hor_pos[self.horizontal] - 1][self.vertical - 1] = ' N '
         hor_pos_int = {1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h'}
 
         for i in range(7, -1, -1):
             for j in range(8):
-                if self.can_move(hor_pos_int[i + 1], j + 1):
-                    board[i][j] = '*'
-                print(board[i][j], sep='', end='')
+                if self.can_move(hor_pos_int[j + 1], i + 1):
+                    board[j][i] = ' * '
+                print(board[j][i], sep='', end='')
             print()
-
-
-knight = Knight('e', 5, 'black')
-
-knight.draw_board()
-knight.move_to('d', 3)
-print()
-knight.draw_board()
-
-knight = Knight('c', 3, 'white')
-print()
-knight.draw_board()
