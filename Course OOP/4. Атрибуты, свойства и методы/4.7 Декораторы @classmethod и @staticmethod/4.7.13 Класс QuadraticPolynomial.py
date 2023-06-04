@@ -6,9 +6,9 @@ class QuadraticPolynomial:
 
     @classmethod
     def from_iterable(cls, iterable):
-        return QuadraticPolynomial(*iterable)
+        return cls(*iterable)
 
     @classmethod
     def from_str(cls, string: str):
         a, b, c = string.split()
-        return QuadraticPolynomial(float(a), float(b), float(c))
+        return cls(float(a), float(b), float(c))

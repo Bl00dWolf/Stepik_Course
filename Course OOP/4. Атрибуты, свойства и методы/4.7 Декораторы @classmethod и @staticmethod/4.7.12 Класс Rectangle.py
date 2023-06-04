@@ -5,4 +5,4 @@ class Rectangle:
 
     @classmethod
     def square(cls, side):
-        return Rectangle(side, side)
+        return cls(side, side)
