@@ -1,22 +1,18 @@
 class Pet:
     pets = []
 
-    def __init__(self, name: str):
+    def __init__(self, name):
         self.name = name
         Pet.pets.append(self)
 
-    @staticmethod
-    def first_pet():
-        if Pet.pets:
-            return Pet.pets[0]
-        return None
+    @classmethod
+    def first_pet(cls):
+        return cls.pets[0] if cls.pets else None
 
-    @staticmethod
-    def last_pet():
-        if Pet.pets:
-            return Pet.pets[-1]
-        return None
+    @classmethod
+    def last_pet(cls):
+        return cls.pets[-1] if cls.pets else None
 
-    @staticmethod
-    def num_of_pets():
-        return len(Pet.pets)
+    @classmethod
+    def num_of_pets(cls):
+        return len(cls.pets)
