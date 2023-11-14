@@ -29,7 +29,7 @@ class Game:
         for i, j in mines_coords_matrix:
             self.board[i][j].mine = True
 
-        # Выставляем атрибут соседей у каждой мины
+        # Выставляем атрибут соседей у каждой клетки
         for i in range(len(self.board)):
             for j in range(len(self.board[i])):
                 neighbours = ((-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1))
