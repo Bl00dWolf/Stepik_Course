@@ -1,52 +1,70 @@
-# from copy import deepcopy, copy
-#
-#
-# class Atomic:
-#     def __init__(self, data: list | set | dict, deep: bool = False):
-#         self._deep = deep
-#         self._safe_data = data
-#         if deep:
-#             self._data = deepcopy(self._safe_data)
-#         else:
-#             self._data = copy(self._safe_data)
-#
-#     def __enter__(self):
-#         return self._data
-#
-#     def __exit__(self, exc_type, exc_val, exc_tb):
-#         # if exc_type is not None:
-#         # self._safe_data = self._data
-#         pass
-
-import copy
+from copy import deepcopy
 
 
 class Atomic:
-    def __init__(self, data, deep=False):
+    def __init__(self, data: list | set | dict, deep: bool = False):
         self.data = data
         self.deep = deep
-        self.backup = None
+        self.__save__ = deepcopy(self.data) if self.deep else self.data.copy()
 
     def __enter__(self):
-        self.backup = copy.deepcopy(self.data) if self.deep else self.data.copy()
         return self.data
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if exc_type:
-            self.data = self.backup
+            if isinstance(self.data, list):
+                self.data[:] = self.__save__
+            if isinstance(self.data, dict):
+                for k, v in self.__save__.items():
+                    self.data[k] = v
+            if isinstance(self.data, set):
+                self.data.clear()
+                self.data.update(self.__save__)
         return True
 
 
-# TEST_5:
-numbers = {1, 2, 3, 4, 5}
+# еще вариант
+# import copy
+#
+#
+# class Atomic:
+#     def __init__(self, data, deep=False):
+#         self.original = data
+#         self.copy = copy.deepcopy if deep else copy.copy
+#
+#         if isinstance(data, list):
+#             self.original_update = self.original.extend
+#         elif isinstance(data, (set, dict)):
+#             self.original_update = self.original.update
+#
+#     def __enter__(self):
+#         self.data = self.copy(self.original)
+#         return self.data
+#
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         if exc_type is None:
+#             self.original.clear()
+#             self.original_update(self.data)
+#         return True
 
-with Atomic(numbers) as atomic:
-    atomic.add(6)
-    atomic.append(7)  # добавление элемента с помощью несуществующего метода
-
-print(sorted(numbers))
-
-with Atomic(numbers) as atomic:
-    atomic.add(6)
-
-print(sorted(numbers))
+# еще вариант
+# from copy import copy, deepcopy
+#
+#
+# class Atomic:
+#     def __init__(self, data, deep=False):
+#         self.data = data
+#         self.deep = deep
+#         self.copy = deepcopy(self.data) if deep else copy(self.data)
+#
+#     def __enter__(self):
+#         return self.copy
+#
+#     def __exit__(self, exc_type, exc_val, traceback):
+#         if exc_type is None:
+#             self.data.clear()
+#             if isinstance(self.data, list):
+#                 self.data.extend(self.copy)
+#             else:
+#                 self.data.update(self.copy)
+#         return True
