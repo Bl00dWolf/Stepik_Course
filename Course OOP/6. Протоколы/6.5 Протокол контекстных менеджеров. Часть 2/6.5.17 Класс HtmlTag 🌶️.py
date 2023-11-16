@@ -1,32 +1,32 @@
 class HtmlTag:
-    def __init__(self, tag, inline=False):
-        self._tag = tag
-        self._level = 0
-        self._content = ''
-        self._indent_size = 2
-        self._inline = inline
+    level = 0
 
-    def print(self, content):
-        if not self._inline:
-            indent = ' ' * self._level * self._indent_size
-            lines = content.splitlines()
-            for line in lines:
-                print(f'{indent}{line}')
-        else:
-            print(content)
+    def __init__(self, tag, inline=False):
+        self.tag = tag
+        self.inline = inline
 
     def __enter__(self):
-        print(f"{' ' * self._level * self._indent_size}<{self._tag}>")
-        self._level += 1
+        self.__class__.level += 1
+        print(f'{"  " * (self.__class__.level - 1)}<{self.tag}>', end='')
+        if not self.inline:
+            print()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self._level -= 1
-        indent = ' ' * self._level * self._indent_size
-        print(f'{indent}</{self._tag}>')
+        if not self.inline:
+            print(f'{"  " * (self.__class__.level - 1)}', end='')
+        print(f'</{self.tag}>')
+        self.__class__.level -= 1
+
+    def print(self, content):
+        if self.inline:
+            print(content, end='')
+        else:
+            print(f'{"  " * self.__class__.level}{content}')
+
 
 with HtmlTag('body') as _:
-    with HtmlTag('h1') as header:
+    with HtmlTag('h1', True) as header:
         header.print('Поколение Python')
-    with HtmlTag('p') as section:
+    with HtmlTag('p', True) as section:
         section.print('Cерия курсов по языку программирования Python от команды BEEGEEK')
