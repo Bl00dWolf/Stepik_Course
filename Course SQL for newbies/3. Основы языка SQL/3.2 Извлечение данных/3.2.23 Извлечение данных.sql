@@ -1,0 +1,1 @@
+SELECT title AS 'Movie', director as 'Directed by' FROM Films;
