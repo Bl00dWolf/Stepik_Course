@@ -1,0 +1,2 @@
+SELECT (SELECT COUNT(*) FROM Films WHERE running_time = (SELECT MIN(running_time) FROM Films)) AS shortest_films,
+       (SELECT COUNT(*) FROM Films WHERE running_time = (SELECT MAX(running_time) FROM Films)) AS longest_films;
