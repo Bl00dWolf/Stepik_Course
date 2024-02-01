@@ -1,4 +1,5 @@
-SELECT Teams.name AS home_team, TM1.name AS away_team
-FROM Teams
-         CROSS JOIN Teams AS TM1
-WHERE TM1.name != Teams.name;
+SELECT user_id, SUM(price * quantity) AS spending
+FROM Orders
+         LEFT JOIN Products ON Orders.product_id = Products.id
+GROUP BY user_id
+ORDER BY spending DESC;
