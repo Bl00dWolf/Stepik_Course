@@ -1,0 +1,4 @@
+INSERT INTO NewSongs
+SELECT *
+FROM Songs
+WHERE id IN ((SELECT MIN(id) FROM Songs), (SELECT MAX(id) FROM Songs));
