@@ -1,0 +1,1 @@
+RENAME TABLE Students TO Pupils;
