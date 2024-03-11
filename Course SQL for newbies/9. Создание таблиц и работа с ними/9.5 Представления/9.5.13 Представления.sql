@@ -1,0 +1,4 @@
+CREATE VIEW UsersWithEmail AS
+SELECT *
+FROM Users
+WHERE email IS NOT NULL;
