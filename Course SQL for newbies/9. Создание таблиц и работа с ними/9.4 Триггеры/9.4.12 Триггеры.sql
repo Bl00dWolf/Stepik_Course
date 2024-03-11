@@ -1,17 +1,31 @@
-DROP TABLE IF EXISTS Users;
-CREATE TABLE Users
-(
-    id           INT AUTO_INCREMENT,
-    name         VARCHAR(20),
-    surname      VARCHAR(20),
-    phone_number VARCHAR(20),
-    PRIMARY KEY (id)
-);
+DELIMITER //
+CREATE TRIGGER phone_number_formatting_before_update
+    BEFORE UPDATE
+    ON Users
+    FOR EACH ROW
+BEGIN
+    SET NEW.phone_number = CONCAT('+7', RIGHT(REPLACE(NEW.phone_number, ' ', ''), 10));
+END //
 
-INSERT INTO Users (name, surname, phone_number)
-VALUES ('Matt', 'Damon', '+79087333025'),
-       ('Edward', 'Norton', '+79642218964'),
-       ('Nicolas', 'Cage', '+79808814813'),
-       ('Ben', 'Affleck', '+79042778299'),
-       ('John', 'Travolta', '+79640950623');
+CREATE TRIGGER phone_number_formatting_before_insert
+    BEFORE INSERT
+    ON Users
+    FOR EACH ROW
+BEGIN
+    SET NEW.phone_number = CONCAT('+7', RIGHT(REPLACE(NEW.phone_number, ' ', ''), 10));
+END //
+DELIMITER ;
 
+# Еще вариант
+CREATE TRIGGER formatting_phone_before_update
+    BEFORE UPDATE
+    ON Users
+    FOR EACH ROW
+    SET NEW.phone_number = CONCAT('+7', SUBSTRING(REPLACE(NEW.phone_number, ' ', ''), 3));
+
+
+CREATE TRIGGER formatting_phone_before_insert
+    BEFORE INSERT
+    ON Users
+    FOR EACH ROW
+    SET NEW.phone_number = CONCAT('+7', SUBSTRING(REPLACE(NEW.phone_number, ' ', ''), 3))
