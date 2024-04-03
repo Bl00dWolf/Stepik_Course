@@ -1,0 +1,1 @@
+SET @variable := 'Hello, World!';
