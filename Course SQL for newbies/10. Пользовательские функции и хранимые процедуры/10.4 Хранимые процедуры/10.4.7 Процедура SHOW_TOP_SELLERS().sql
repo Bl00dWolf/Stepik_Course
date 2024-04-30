@@ -1,0 +1,10 @@
+DELIMITER //
+CREATE PROCEDURE SHOW_TOP_SELLERS()
+BEGIN
+    SELECT store
+    FROM Orders
+    GROUP BY store
+    ORDER BY SUM(amount) DESC
+    LIMIT 3;
+END //
+DELIMITER ;
