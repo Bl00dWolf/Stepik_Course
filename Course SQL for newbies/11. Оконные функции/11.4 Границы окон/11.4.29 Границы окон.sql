@@ -1,0 +1,7 @@
+SELECT *,
+       COALESCE(SUM(quantity) OVER (ORDER BY day RANGE BETWEEN INTERVAL 1 DAY PRECEDING AND INTERVAL 1 DAY PRECEDING), 'unknown') AS sales_better_than_yesterday
+FROM Sales;
+
+SELECT *,
+       SUM(quantity) OVER (ORDER BY day RANGE BETWEEN INTERVAL 1 DAY PRECEDING AND INTERVAL 1 DAY PRECEDING) AS sales_better_than_yesterday
+FROM Sales;
